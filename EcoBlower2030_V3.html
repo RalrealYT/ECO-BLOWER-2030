@@ -1,0 +1,1103 @@
+<!doctype html>
+<html lang="ca-valencia"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#102821"><title>Eco Blower 2030 V3</title><style>:root{color-scheme:dark;--bg:#10261f;--panel:#17362d;--ink:#eef7e9;--soft:#b5cabd;--lime:#c7f474;font-family:system-ui,sans-serif;color:var(--ink);background:var(--bg)}*{box-sizing:border-box}[hidden]{display:none!important}body{margin:0}header,main{max-width:1520px;margin:auto}header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px clamp(12px,3vw,42px);flex-wrap:wrap}.brand{display:flex;gap:12px;align-items:center;color:inherit;text-decoration:none;letter-spacing:.08em}.brand svg{width:38px}.brand small{color:var(--lime)}main{padding:0 clamp(8px,2vw,30px)}#stage{height:clamp(500px,calc(100dvh - 135px),920px);position:relative;overflow:hidden;border:1px solid #527363;border-radius:23px;background:#456e41;isolation:isolate}canvas{width:100%;height:100%;display:block;touch-action:none}#shade{position:absolute;inset:0;background:linear-gradient(90deg,#10291ff7 0%,#10291fdc 28%,#10291f4d 65%,transparent);pointer-events:none}#home{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:clamp(24px,6vw,100px);align-items:flex-start}h1{font-size:clamp(3.1rem,9vw,8.5rem);line-height:.83;letter-spacing:-.085em;margin:0;font-weight:900}h1 span{color:var(--lime);display:block}#home p{max-width:390px;font-size:clamp(1rem,2vw,1.28rem);color:#e0eee0;margin:26px 0}button,select,input{font:inherit}button{cursor:pointer;background:#234538;color:var(--ink);border:1px solid #527363;border-radius:10px;min-height:42px;padding:8px 13px;font-weight:650}button:hover{background:#345c49}button:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #fff;outline-offset:3px}button:disabled{opacity:.55;cursor:default}.primary{background:var(--lime);color:#173222;border-color:transparent}.primary:hover{background:#e2ffa9}.buttons,nav{display:flex;flex-wrap:wrap;gap:8px}#hud{position:absolute;pointer-events:none;top:12px;left:12px;right:12px;display:flex;justify-content:space-between;gap:8px;align-items:flex-start}.hud-card{background:#10281fee;padding:10px 13px;border:1px solid #72917c;border-radius:13px;box-shadow:0 4px 18px #10281f48;font-size:.86rem}.hud-card b{color:var(--lime)}progress{display:block;width:100%;accent-color:var(--lime);height:8px;margin-top:7px}#toast{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);text-align:center;background:#10281fef;color:#efffd7;border-radius:10px;padding:8px 13px;pointer-events:none;max-width:85%;width:max-content}#toast:empty{display:none}footer{padding:10px 4px;color:var(--soft);font-size:.86rem}dialog{background:var(--panel);color:var(--ink);width:min(800px,94vw);max-height:86dvh;border:1px solid #728f7b;border-radius:20px;padding:0;box-shadow:0 20px 80px #0008}dialog::backdrop{background:#091a13b8}#dialogHead{position:sticky;top:0;background:var(--panel);display:flex;align-items:center;justify-content:space-between;padding:12px 20px;z-index:1;border-bottom:1px solid #4a6c5b}h2{margin:0}#content{padding:18px 20px}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:10px}.card{padding:13px;border:1px solid #527363;border-radius:12px;background:#102c24}.card h3{margin:0 0 6px}.card p{margin:5px 0 10px;color:var(--soft)}.card button{width:100%}.tag{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:7px;margin-right:7px;color:white;text-shadow:0 1px 4px black;font-weight:900}.setting{display:flex;justify-content:space-between;align-items:center;padding:10px 0;gap:12px}#touch{position:absolute;inset:0;pointer-events:none;display:none}#touch button{pointer-events:auto;touch-action:none;position:absolute;bottom:18px;background:#122b24c9;border:2px solid #d4efc8}#stick{left:18px;width:94px;height:94px;border-radius:50%;display:grid;place-items:center}#stick span{display:block;width:31px;height:31px;border-radius:50%;background:#c7f474;pointer-events:none}#boost{right:18px;width:69px;height:69px;border-radius:50%;font-size:24px}#boost:active{background:#39634a}@media(pointer:coarse){#touch{display:block}#toast{bottom:115px}#stage{min-height:380px;height:calc(100dvh - 155px)}}@media(max-width:620px){header{padding:8px 10px}nav button{min-height:36px;padding:5px 8px;font-size:.78rem}#hud{inset:7px 7px auto;gap:5px}.hud-card{font-size:.72rem;padding:7px}.buttons button{font-size:.88rem}#shade{background:linear-gradient(90deg,#10291ff2,#10291f86)}#stage{border-radius:15px}}
+#nearStation{position:absolute;left:50%;top:118px;transform:translateX(-50%);pointer-events:auto;padding:0}
+#nearStation button{white-space:nowrap}
+#tankLabel{display:block;margin-top:6px}
+#tankBar{appearance:none;background:#35574a;border-radius:12px;overflow:hidden;--tone:#a9e989}
+#tankBar[data-fill=high]{--tone:#ffdc66}
+#tankBar[data-fill=full]{--tone:#ff8663;box-shadow:0 0 0 2px #ff8663aa}
+#tankBar::-webkit-progress-bar{background:#35574a}
+#tankBar::-webkit-progress-value{background:var(--tone);transition:width .2s ease,background .2s ease}
+#tankBar::-moz-progress-bar{background:var(--tone);transition:width .2s ease,background .2s ease}
+#home h1 small{font-size:.28em;letter-spacing:0;color:#eef7e9;vertical-align:middle}
+@media(max-width:620px){#nearStation{top:99px}}
+@media(prefers-reduced-motion:reduce){#tankBar::-webkit-progress-value{transition:none}#tankBar::-moz-progress-bar{transition:none}}
+#tankBar[data-fill=near]{--tone:#ffa248}
+#cleanLocal{display:block;margin-top:7px}
+.recovery.stage-0{color:#ff9182}
+.recovery.stage-1{color:#ffb178}
+.recovery.stage-2{color:#ffe373}
+.recovery.stage-3{color:#bff49a}
+</style></head>
+<body><header><a class="brand" href="./"><svg viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="12" fill="#c7f474"/><path d="M12 28c0-12 7-16 18-17-1 12-5 20-16 17m-3 3 11-11" fill="none" stroke="#163528" stroke-width="2.5"/></svg><strong>ECO BLOWER <small>2030</small></strong></a><nav id="nav" hidden></nav></header>
+<main><div id="stage"><canvas id="world" tabindex="0" aria-label="Eco Blower 2030"></canvas><div id="shade"></div><section id="home"></section><div id="hud" hidden></div><div id="toast" role="status"></div><div id="touch" hidden><button id="stick" aria-label="Joystick"><span></span></button><button id="boost" aria-label="Activar aspiración">➤</button></div></div><footer id="footer"></footer></main>
+<dialog id="modal"><div id="dialogHead"><h2 id="title"></h2><button id="close" aria-label="Tancar / Cerrar">×</button></div><div id="content"></div></dialog>
+<script type="module">
+const W=1600,H=980;
+const entrance={x:397,y:270};
+const depot={x:770,y:510};
+const paths=[
+  [[0,284],[450,171],[980,328],[1600,275]],
+  [[730,270],[604,613],[880,741],[870,H]],
+  [[210,270],[150,606],[470,740],[1320,676]],
+  [[1180,620],[1180,638],[1190,659],[1194,686]]
+];
+const segments=paths.map(path=>Array.from({length:65},(_,i)=>{
+  const t=i/64,u=1-t;
+  return [0,1].map(k=>u**3*path[0][k]+3*u*u*t*path[1][k]+3*u*t*t*path[2][k]+t**3*path[3][k]);
+}));
+function drawPaths(c,color,width){
+  c.lineCap='round';c.strokeStyle=color;c.lineWidth=width;
+  for(const [start,...points] of paths){
+    c.beginPath();c.moveTo(...start);c.bezierCurveTo(...points.flat());c.stroke();
+  }
+}
+function distanceSquared(x,y,line){
+  let best=Infinity;
+  for(let i=1;i<line.length;i++){
+    const [a,b]=line[i-1], dx=line[i][0]-a,dy=line[i][1]-b;
+    const t=Math.max(0,Math.min(1,((x-a)*dx+(y-b)*dy)/(dx*dx+dy*dy)));
+    best=Math.min(best,(x-a-t*dx)**2+(y-b-t*dy)**2);
+  }
+  return best;
+}
+const roadWidth=54;
+function onRoad(x,y,margin=0){
+  return segments.some(line=>distanceSquared(x,y,line)<=(roadWidth+margin)**2);
+}
+function zoneAt(x,y){
+  if(distanceSquared(x,y,segments[0])<=roadWidth**2)return 0;
+  if(segments.slice(1).some(line=>distanceSquared(x,y,line)<=roadWidth**2))return 1;
+  return x<W/2?2:3;
+}
+
+const maps = [
+  {name:['Parc urbà','Parque urbano'], mission:['Recupera els camins del parc','Recupera los senderos del parque'], goal:120, ids:[11,12,15], ground:'#76a957', path:'#d3bf83', seed:38, item:'carton'},
+  {name:['Platja sostenible','Playa sostenible'], mission:['Deixa neta la vora de la mar','Deja limpia la orilla del mar'], goal:95, ids:[6,14], ground:'#d9be7e', path:'#efe0aa', seed:64, item:'glass'},
+  {name:['Bosc en recuperació','Bosque en recuperación'], mission:['Classifica residus i prepara compost','Clasifica residuos y prepara compost'], goal:110, ids:[13,15], ground:'#5b935e', path:'#b9ad7d', seed:95, item:'twig'},
+  {name:['Ciutat del futur','Ciudad del futuro'], mission:['Activa la xarxa de recollida selectiva','Activa la red de recogida selectiva'], goal:130, ids:[7,9,11], ground:'#91aa98', path:'#c2cbb9', seed:103, item:'chip'}
+];
+const materials = {
+  paper:{ bin:0,mass:.7,value:4 }, carton:{bin:0,mass:1,value:5}, bottle:{bin:1,mass:1,value:5}, can:{bin:1,mass:1.22,value:6},
+  leaf:{bin:2,mass:.55,value:3}, twig:{bin:2,mass:.8,value:4}, glass:{bin:3,mass:1.6,value:8}, chip:{bin:4,mass:1.4,value:9}
+};
+const bins = [
+  {x:500,y:270,color:'#6aaeff',mark:'▤',name:['Paper','Papel']},{x:750,y:270,color:'#ffdc66',mark:'◇',name:['Envasos','Envases']},
+  {x:1000,y:270,color:'#eaa671',mark:'❧',name:['Compost','Compost']},{x:1250,y:270,color:'#70eaa7',mark:'◈',name:['Vidre','Vidrio']},
+  {x:1180,y:620,color:'#d6adff',mark:'↻',name:['Reutilització','Reutilización']}
+];
+const upgrades = [
+ ['Potència','Potencia','+16 % de força base','+16 % de fuerza base',90],
+ ['Abast','Alcance','+14 unitats','+14 unidades',115],
+ ['Eficiència','Eficiencia','Consum dividit per 1 + 0,16 × nivell','Consumo dividido por 1 + 0,16 × nivel',130],
+ ['Bateria','Batería','+20 energia','+20 energía',100],
+ ['Recàrrega','Recarga','+5 energia per segon','+5 energía por segundo',120],
+ ['Mobilitat','Movilidad','+18 velocitat base','+18 velocidad base',110],
+ ['Dipòsit','Depósito','+15 % de capacitat base','+15 % de capacidad base',95],
+ ['Classificació','Clasificación','+3 % del valor base','+3 % del valor base',125]
+];
+// Names, price, storage, suction, extra reach, energy draw, tint and cone half-angle.
+const tools = [
+ ['Bàsica','Básica',0,25,1,0,1,'#c7f474',.42],
+ ['Mini','Mini',260,45,1.4,17,.98,'#73d4ff',.47],
+ ['Plus','Plus',800,80,2,30,.94,'#ffce69',.53],
+ ['Turbo','Turbo',3600,150,3,45,1.04,'#f28aaa',.59],
+ ['Solar','Solar',12500,300,4.5,61,.73,'#f7ef8b',.64],
+ ['Industrial','Industrial',46000,600,7,83,.85,'#ff995c',.70],
+ ['Quantum','Quantum',215000,1200,11,107,.73,'#b0a0ff',.76],
+ ['2030','2030',900000,2500,18,140,.65,'#78ffe8',.82]
+];
+const sizes={paper:1,carton:3,bottle:2,can:2,leaf:1,twig:2,glass:5,chip:5};
+const regionRate=[1,2.25,4.8,9.2];
+const upgradeGrowth=1.6;
+const prestige=[
+ ['Potència permanent','Potencia permanente',.05],
+ ['Dipòsit permanent','Depósito permanente',.10],
+ ['Mobilitat permanent','Movilidad permanente',.05],
+ ['Reciclatge permanent','Reciclaje permanente',.05]
+];
+const ods = [
+ ['Fi de la pobresa','Fin de la pobreza','#e5243b','Facilitar l’accés a recursos i serveis bàsics.','Facilitar el acceso a recursos y servicios básicos.'],
+ ['Fam zero','Hambre cero','#af7d23','Col·laborar amb un banc d’aliments.','Colaborar con un banco de alimentos.'],
+ ['Salut i benestar','Salud y bienestar','#4c9f38','Fer activitat física en espais públics segurs.','Hacer actividad física en espacios públicos seguros.'],
+ ['Educació de qualitat','Educación de calidad','#c5192d','Compartir materials d’estudi accessibles.','Compartir materiales de estudio accesibles.'],
+ ['Igualtat de gènere','Igualdad de género','#dc422b','Repartir les responsabilitats sense estereotips.','Repartir las responsabilidades sin estereotipos.'],
+ ['Aigua neta i sanejament','Agua limpia y saneamiento','#007995','Evitar tirar residus al clavegueram.','Evitar tirar residuos al alcantarillado.'],
+ ['Energia assequible i no contaminant','Energía asequible y no contaminante','#997100','Aprofitar l’energia solar quan siga viable.','Aprovechar la energía solar cuando sea viable.'],
+ ['Treball decent i creixement econòmic','Trabajo decente y crecimiento económico','#a21942','Promoure condicions de treball segures i justes.','Promover condiciones de trabajo seguras y justas.'],
+ ['Indústria, innovació i infraestructura','Industria, innovación e infraestructura','#b94415','Dissenyar equips reparables.','Diseñar equipos reparables.'],
+ ['Reducció de les desigualtats','Reducción de las desigualdades','#bb1362','Fer accessibles els espais i serveis.','Hacer accesibles los espacios y servicios.'],
+ ['Ciutats i comunitats sostenibles','Ciudades y comunidades sostenibles','#9b6100','Cuidar els parcs i millorar la mobilitat a peu.','Cuidar los parques y mejorar la movilidad a pie.'],
+ ['Producció i consum responsables','Producción y consumo responsables','#946923','Reduir compres innecessàries, reparar i separar residus.','Reducir compras innecesarias, reparar y separar residuos.'],
+ ['Acció pel clima','Acción por el clima','#3f7e44','Millorar l’eficiència energètica i les opcions de transport.','Mejorar la eficiencia energética y las opciones de transporte.'],
+ ['Vida submarina','Vida submarina','#006fa1','Recollir residus de la platja abans que arriben a la mar.','Recoger residuos de la playa antes de que lleguen al mar.'],
+ ['Vida d’ecosistemes terrestres','Vida de ecosistemas terrestres','#437c20','Respectar la fullaraca que protegeix el sòl del bosc.','Respetar la hojarasca que protege el suelo del bosque.'],
+ ['Pau, justícia i institucions sòlides','Paz, justicia e instituciones sólidas','#00689d','Participar en decisions comunitàries transparents.','Participar en decisiones comunitarias transparentes.'],
+ ['Aliances per a aconseguir els objectius','Alianzas para lograr los objetivos','#19486a','Organitzar una jornada amb el centre educatiu i el barri.','Organizar una jornada con el centro educativo y el barrio.']
+];
+
+const odsSummary = [
+  ['Reduir la pobresa en totes les seues formes.','Reducir la pobreza en todas sus formas.'],
+  ['Millorar l’accés a aliments suficients i nutritius.','Mejorar el acceso a alimentos suficientes y nutritivos.'],
+  ['Afavorir la salut i el benestar en totes les edats.','Favorecer la salud y el bienestar a todas las edades.'],
+  ['Garantir oportunitats d’aprenentatge accessibles i de qualitat.','Garantizar oportunidades de aprendizaje accesibles y de calidad.'],
+  ['Defendre la igualtat de drets i oportunitats entre gèneres.','Defender la igualdad de derechos y oportunidades entre géneros.'],
+  ['Garantir l’accés a aigua segura i sanejament.','Garantizar el acceso a agua segura y saneamiento.'],
+  ['Facilitar l’accés a energia fiable, assequible i sostenible.','Facilitar el acceso a energía fiable, asequible y sostenible.'],
+  ['Promoure entorns laborals dignes i segurs.','Promover entornos laborales dignos y seguros.'],
+  ['Construir infraestructures resilients i fomentar la innovació sostenible.','Construir infraestructuras resilientes y fomentar la innovación sostenible.'],
+  ['Reduir les desigualtats dins dels països i entre ells.','Reducir las desigualdades dentro de los países y entre ellos.'],
+  ['Fer que els pobles i les ciutats siguen inclusius, segurs i sostenibles.','Hacer que los pueblos y las ciudades sean inclusivos, seguros y sostenibles.'],
+  ['Reduir l’impacte ambiental de la producció i el consum.','Reducir el impacto ambiental de la producción y el consumo.'],
+  ['Actuar davant del canvi climàtic i els seus efectes.','Actuar frente al cambio climático y sus efectos.'],
+  ['Conservar els oceans i utilitzar responsablement els recursos marins.','Conservar los océanos y usar responsablemente los recursos marinos.'],
+  ['Conservar la biodiversitat terrestre i recuperar els ecosistemes degradats.','Conservar la biodiversidad terrestre y recuperar los ecosistemas degradados.'],
+  ['Promoure societats pacífiques, justícia accessible i institucions responsables.','Promover sociedades pacíficas, justicia accesible e instituciones responsables.'],
+  ['Cooperar entre territoris i institucions per a assolir els objectius.','Cooperar entre territorios e instituciones para alcanzar los objetivos.']
+];
+
+function rng(seed) {
+  return () => {
+    seed = (Math.imul(1664525,seed) + 1013904223) >>> 0;
+    return seed / 4294967296;
+  };
+}
+function ellipse(c,x,y,rx,ry,color) {
+  c.fillStyle=color; c.beginPath(); c.ellipse(x,y,rx,ry,0,0,Math.PI*2); c.fill();
+}
+function box(c,x,y,w,h,color,r=4) {
+  c.fillStyle=color; c.beginPath(); c.roundRect(x,y,w,h,r); c.fill();
+}
+function tree(c,x,y,s,i,stage=0) {
+  c.save(); c.translate(x,y); c.scale(s,s);
+  ellipse(c,12,8,32,15,'#18332945');
+  box(c,-5,-34,10,39,'#705042');
+  if(i===1){
+    c.rotate(.15);
+    for(let a=0;a<6;a++){
+      c.save(); c.translate(0,-34);c.rotate(a*Math.PI/3);
+      ellipse(c,15,1,21,6,a%2?'#469151':'#286945');c.restore();
+    }
+    ellipse(c,0,-34,4,4,'#ffd685');
+  } else {
+    const colors=stage>=2?['#236849','#42a35f',stage===3?'#91c875':'#78b86d']:
+      i===2?['#184b43','#28634a','#3b7858']:['#28674a','#3b8755','#69a65c'];
+    ellipse(c,0,-28,32,24,colors[0]);
+    ellipse(c,-14,-39,20,22,colors[1]);ellipse(c,13,-42,22,21,colors[1]);
+    ellipse(c,-2,-53,23,17,colors[2]);
+    ellipse(c,-9,-57,9,4,'#d6efa02c');
+  }
+  c.restore();
+}
+function makeWorld(map,i){
+  const layer=document.createElement('canvas'); layer.width=W; layer.height=H;
+  const c=layer.getContext('2d'), random=rng(map.seed);
+  c.fillStyle=map.ground;c.fillRect(0,0,W,H);
+  if(i===1){
+    c.fillStyle='#239e9a';c.beginPath();c.moveTo(0,0);c.lineTo(W,0);c.lineTo(W,118);c.bezierCurveTo(1010,70,420,174,0,105);c.fill();
+    c.strokeStyle='#8ce2c5';c.lineWidth=13;c.stroke();
+  }
+  drawPaths(c,'#273e3238',118);drawPaths(c,map.path,108);
+  for(let j=0;j<5200;j++){
+    const x=random()*W,y=random()*H;
+    ellipse(c,x,y,1+random()*3,1, j%2?'#faffc826':'#193d3620');
+  }
+  const props=[], fixtures=[];
+  const access=[entrance,depot,...bins];
+  function place(x,y,margin,existing){
+    const permitted=(px,py)=>px>44&&px<W-44&&py>(i===1?180:85)&&py<H-37&&
+      !onRoad(px,py,margin)&&access.every(a=>Math.hypot(px-a.x,py-a.y)>90+margin)&&
+      existing.every(a=>Math.hypot(px-a.x,py-a.y)>margin*.5+a.r+7);
+    if(permitted(x,y))return {x,y};
+    for(const d of [30,65,100,145]){
+      for(let j=0;j<8;j++){
+        const a=j*Math.PI/4,px=x+Math.cos(a)*d,py=y+Math.sin(a)*d;
+        if(permitted(px,py))return {x:px,y:py};
+      }
+    }
+    return null;
+  }
+  for(const [px,py] of [[310,175],[900,388],[1385,365],[493,702]]){
+    const r=i===0&&px===900?34:i===1?8:22;
+    const location=place(px,py,r+32,fixtures);
+    if(!location)continue;
+    const {x,y}=location;
+    fixtures.push({x,y,r});
+    ellipse(c,x+10,y+4,32,12,'#203a2d42');
+    if(i===0&&px===900){
+      ellipse(c,x,y,41,28,'#7b9785');ellipse(c,x,y-4,35,23,'#e8e8bd');
+      ellipse(c,x,y-5,29,18,'#55aeb1');ellipse(c,x,y-12,13,8,'#8de0d9');
+    }else if(i===1){
+      ellipse(c,x,y-28,24,18,'#fc786d');ellipse(c,x+5,y-27,12,17,'#ffe0a0');box(c,x-1,y-26,3,26,'#775d43');
+    }else{
+      box(c,x-23,y-8,46,9,'#654637');box(c,x-23,y-16,46,10,'#b2794d');
+      box(c,x-18,y,4,7,'#423a32');box(c,x+15,y,4,7,'#423a32');
+    }
+  }
+  for(let j=0;j<100;j++){
+    const x=45+random()*1500,y=120+random()*800;
+    const scale=.65+random()*.6;
+    const cluster=j%4!==0;
+    const spot=place(x,y,cluster?Math.ceil(38+63*scale):34,fixtures.concat(props));
+    if(!spot)continue;
+    if(cluster)props.push({...spot,zone:zoneAt(spot.x,spot.y),r:13*scale,scale,city:i===3&&j%3!==0});
+    else for(let k=0;k<8;k++){
+      const dx=spot.x+(random()-.5)*39,dy=spot.y+(random()-.5)*28;
+      ellipse(c,dx,dy,4,2,'#487653');
+      ellipse(c,dx-2,dy-3,2.6,2.4,['#fff0b0','#f4a6ab','#e9d7ff'][k%3]);
+    }
+  }
+  return {layer,props,obstacles:props.concat(fixtures)};
+}
+function scenery(c,p,i,stage=0) {
+  if(!p.city){tree(c,p.x,p.y,p.scale,i,stage);return;}
+  c.save();c.translate(p.x,p.y);c.scale(p.scale,p.scale);
+  ellipse(c,15,6,36,18,'#26394452');
+  box(c,-28,-51,56,58,'#607f83',7);box(c,-28,-65,56,29,'#d3e4c9',7);
+  box(c,-20,-60,40,19,'#2e5477');
+  for(let x=-15;x<=15;x+=10)box(c,x,-59,2,17,'#75c8d4');
+  for(let x=-17;x<=17;x+=13)box(c,x,-25,8,12,'#d1f2e2');
+  box(c,23,-32,8,34,stage>=2?'#6caa65':'#477e59');c.restore();
+}
+function station(c,b,label,current) {
+  ellipse(c,b.x+6,b.y+5,38,20,'#173b2b48');
+  c.beginPath();c.ellipse(b.x,b.y,39,31,0,0,Math.PI*2);c.setLineDash([4,5]);
+  c.strokeStyle=b.color;c.lineWidth=2;c.stroke();c.setLineDash([]);
+  box(c,b.x-23,b.y-21,46,29,'#203b35',7);
+  box(c,b.x-25,b.y-26,50,13,b.color,5);
+  box(c,b.x-12,b.y-23,24,4,'#203b35',2);
+  c.font='bold 15px system-ui';c.textAlign='center';c.fillStyle='#fff';c.fillText(b.mark,b.x,b.y+3);
+  c.font='bold 11px system-ui';const w=c.measureText(label).width+12;
+  box(c,b.x-w/2,b.y-47,w,16,current?'#17382b':'#284333');
+  c.fillStyle='#fff';c.fillText(label,b.x,b.y-35);
+}
+function debris(c,o) {
+  c.save(); c.translate(o.x,o.y); c.rotate(o.angle);
+  ellipse(c,2,3,9,5,'#263b2a60');
+  switch(o.kind){
+    case 'paper':box(c,-8,-5,16,11,'#f9f4df',2);box(c,-5,-3,9,1,'#78a2bc',0);box(c,-5,0,6,1,'#78a2bc',0);break;
+    case 'carton':box(c,-8,-6,16,12,'#ac6c40',2);box(c,-7,-6,14,8,'#e5b57e',2);box(c,-2,-6,4,12,'#f3cf8e',0);break;
+    case 'bottle':box(c,-8,-5,13,10,'#8dddef',3);box(c,-4,-5,5,10,'#e6fbff',1);box(c,4,-3,5,6,'#426ca8',2);break;
+    case 'can':box(c,-7,-5,13,10,'#ed7953',2);box(c,-8,-5,3,10,'#f1e7c6',2);box(c,5,-5,3,10,'#ece9ce',2);break;
+    case 'leaf':ellipse(c,0,0,9,4,'#bc6628');ellipse(c,-2,-1,6,2,'#e3a146');box(c,-9,0,16,1,'#804c29',0);break;
+    case 'twig':box(c,-10,-2,20,4,'#7c462e');c.rotate(.6);box(c,-1,-4,7,3,'#b87b47');break;
+    case 'glass':box(c,-7,-6,12,12,'#2a9a73',3);box(c,-5,-5,4,10,'#72e7ac',2);box(c,3,-3,7,6,'#a3dfb9',2);break;
+    case 'chip':box(c,-8,-6,16,12,'#8763a2');box(c,-4,-4,8,8,'#e2c7fa');for(let j=-6;j<=6;j+=4){box(c,j,-8,2,3,'#ffe1a1');box(c,j,5,2,3,'#ffe1a1');}break;
+  }
+  c.restore();
+}
+function player(c,p,tool,t,air,index=0) {
+  ellipse(c,p.x+3,p.y+7,16,10,'#193a2c70');
+  c.save();c.translate(p.x,p.y);c.rotate(p.angle);
+  const step=p.walk?Math.sin(t*14)*4:0;
+  box(c,-11+step,-11,11,7,'#243d4e');box(c,-11-step,4,11,7,'#243d4e');
+  ellipse(c,-3,0,13,12,'#286067');
+  const pack=10+Math.floor(index/2), hose=15+index;
+  box(c,-pack-5,-7-index*.5,pack,15+index,tool,index%2?7:3);
+  box(c,-pack-2,-4,4,9,index===4?'#426a8d':'#314c46',2);
+  if(index===2)box(c,-pack-4,-5,2,8,'#f6ffe1');
+  if(index===3)box(c,hose-2,11,9,4,tool,2);
+  if(index===4)for(let j=0;j<3;j++)box(c,-pack-4+j*3,-8,2,7,'#69a8cf');
+  if(index===5){box(c,-pack-6,-9,4,19,'#394f3f');box(c,hose,0,5,16,'#4d5f55');}
+  if(index===6)ellipse(c,-pack,0,4,4,air?'#e7dfff':'#8470ad');
+  if(index===7){box(c,-pack-8,-8,4,18,'#c1ffe9');box(c,hose+7,2,4,14,'#d9fff3',3);}
+  if(index>=3)ellipse(c,-pack-1,4,2.5,2.5,air?'#f5ffbd':'#314c46');
+  box(c,-4,5,hose+12,6,'#334749',4);
+  box(c,hose,3,9,10+index*.35,tool,index>=6?4:2);
+  if(air)box(c,hose+6,4,3,8+index*.35,'#eaffd4',1);
+  ellipse(c,3,-1,10,9,'#dba376');ellipse(c,0,-3,11,9,'#f4ce73');
+  box(c,3,-10,10,5,'#fbe293',2);
+  c.restore();
+}
+
+
+const zones=[
+  ['Camí central','Camino central'],['Senders i accessos','Senderos y accesos'],
+  ['Jardins de ponent','Jardines del oeste'],['Espais de llevant','Espacios del este']
+];
+const density=[74,88,90,116];
+const respawn=[1.7,2.15,2.35,1.35];
+const shares=[.16,.28,.29,.27];
+const goals=maps.map(map=>shares.map((n,i)=>i===3?
+  map.goal-shares.slice(0,3).reduce((sum,v)=>sum+Math.round(v*map.goal),0):Math.round(n*map.goal)));
+
+function createEnvironment(progress=[],saved=[]){
+  return goals.map((target,r)=>{
+    const prior=Math.min(maps[r].goal,progress[r]||0);
+    const share=target.map(limit=>limit*prior/maps[r].goal);
+    const migrated=share.map(Math.floor);
+    const remainder=prior-migrated.reduce((a,b)=>a+b,0);
+    const order=share.map((n,i)=>({i,fraction:n-migrated[i]})).sort((a,b)=>b.fraction-a.fraction);
+    for(let n=0;n<remainder;n++)migrated[order[n].i]++;
+    return target.map((limit,z)=>{
+      const value=saved?.[r]?.[z];
+      return Number.isInteger(value)?Math.min(limit,Math.max(0,value)):migrated[z];
+    });
+  });
+}
+const emptyPending=()=>zones.map(()=>Object.fromEntries(Object.keys(sizes).map(k=>[k,0])));
+const zonePercent=(s,r,z)=>Math.round(100*s.clean[r][z]/goals[r][z]);
+const mapPercent=(s,r)=>Math.round(100*s.clean[r].reduce((a,b)=>a+b,0)/maps[r].goal);
+const recoveryStage=percent=>percent===100?3:percent>=74?2:percent>=34?1:0;
+function addTreatment(s,kind){
+  let bonus=0,recovered=[];
+  const r=s.region;
+  s.pending.forEach((stock,z)=>{
+    const n=stock[kind];
+    stock[kind]=0;
+    const goal=goals[r][z], previous=s.clean[r][z];
+    s.clean[r][z]=Math.min(goal,previous+n);
+    if(previous<goal&&s.clean[r][z]===goal){
+      bonus+=[28,62,115,235][r];
+      recovered.push(z);
+    }
+  });
+  return {bonus,recovered};
+}
+function spawnLimits(s,r,z){
+  const outstanding=goals[r][z]-s.clean[r][z];
+  const pending=Object.values(s.pending[z]).reduce((sum,n)=>sum+n,0);
+  const available=Math.max(0,outstanding-pending);
+  const fraction=outstanding/goals[r][z];
+  return {
+    cap:Math.min(available,Math.ceil(density[r]*shares[z]*fraction)),
+    interval:fraction?respawn[r]*(1.35+3*(1-fraction)):Infinity
+  };
+}
+function restoreField(value){
+  if(!Array.isArray(value))return null;
+  const velocity=n=>Number.isFinite(n)?Math.max(-520,Math.min(520,n)):0;
+  return value.slice(0,125).filter(o=>o&&Object.hasOwn(sizes,o.kind)&&
+    Number.isInteger(o.zone)&&o.zone>=0&&o.zone<zones.length&&
+    Number.isFinite(o.x)&&o.x>=7&&o.x<=W-7&&Number.isFinite(o.y)&&o.y>=7&&o.y<=H-7)
+    .map(o=>({kind:o.kind,zone:o.zone,x:o.x,y:o.y,vx:velocity(o.vx),vy:velocity(o.vy),angle:Number.isFinite(o.angle)?o.angle:0}));
+}
+
+
+
+const key='ecoblower2030-v3', previousKey='ecoblower2030-v2', legacyKey='ecoblower2030-v1';
+const limit=Number.MAX_SAFE_INTEGER;
+const integer=(value,max=limit)=>Number.isSafeInteger(value)?Math.min(max,Math.max(0,value)):0;
+const series=(value,length,max)=>Array.from({length},(_,i)=>integer(Array.isArray(value)?value[i]:0,max));
+const flags=list=>list.map(n=>Number(n>0));
+const statsNames=['seconds','suctioned','recycled','earned','runEarned','deliveries','maps','vacuums'];
+const emptyTank=()=>Object.fromEntries(Object.keys(sizes).map(k=>[k,0]));
+const multiplier=s=>1+s.rebirth*.15;
+const tankSize=s=>Math.floor(tools[s.equipped][3]*(1+s.levels[6]*.15+s.permanent[1]*prestige[1][2]));
+const used=s=>Object.entries(s.tank).reduce((sum,[k,n])=>sum+sizes[k]*n,0);
+const boughtPrice=(index)=>2+index*2;
+const required=s=>Math.min(limit,Math.round(42000*1.8**s.rebirth));
+const eligible=s=>used(s)===0&&s.rebirth<50&&s.owned[4]===1&&s.stats.runEarned>=required(s)&&s.counts.slice(0,3).every((n,i)=>n>=maps[i].goal);
+function addCredits(s,n){
+  s.ec=Math.min(limit,s.ec+n);
+  s.stats.earned=Math.min(limit,s.stats.earned+n);
+  s.stats.runEarned=Math.min(limit,s.stats.runEarned+n);
+}
+function priceFor(s,kind){
+  return (materials[kind].value+2)*regionRate[s.region]*(1+s.levels[7]*.03+s.permanent[3]*prestige[3][2])*multiplier(s);
+}
+function resetCycle(s){
+  Object.assign(s,{ec:0,pi:0,unlocked:0,region:0,counts:[0,0,0,0],levels:Array(8).fill(0),
+    types:Array(5).fill(0),owned:[1,0,0,0,0,0,0,0],equipped:0,tank:emptyTank(),pending:emptyPending()});
+  s.stats.runEarned=0;
+}
+function reborn(s){
+  if(!eligible(s))return false;
+  s.rebirth++;s.gems+=4;
+  resetCycle(s);
+  return true;
+}
+function read(name){
+  try{const value=JSON.parse(localStorage.getItem(name));return value&&typeof value==='object'&&!Array.isArray(value)?value:null}catch{return null}
+}
+function load(){
+  const candidate=read(key), v3=candidate?.version===3?candidate:null;
+  const previous=v3?null:read(previousKey);
+  const old=v3||previous?null:read(legacyKey);
+  const s=v3||previous||old||{};
+  const count=series(s.counts,4,1e7);
+  // Old mission thresholds are translated to equivalent V2 progress.
+  if(old)count.forEach((n,i)=>{const goals=[16,22,28,34];count[i]=Math.floor(n*maps[i].goal/goals[i]);});
+  const unlocked=integer(s.unlocked,3);
+  const owned=series(s.owned,8,1);
+  owned[0]=1;
+  const highest=owned.lastIndexOf(1);
+  if(old)owned.fill(0,1); // V1 blower prices did not match the suction catalogue.
+  else if(highest>0)owned.fill(1,0,highest);
+  const equipped=integer(s.equipped,7);
+  const stats=Object.fromEntries(statsNames.map(k=>[k,integer(s.stats?.[k])]));
+  stats.vacuums=Math.max(1,stats.vacuums);
+  const types=series(s.types,5,1e7);
+  if(old){
+    stats.recycled=types.reduce((a,b)=>a+b,0);stats.suctioned=stats.recycled;
+    stats.earned=integer(s.ec);stats.runEarned=stats.earned;
+    stats.maps=count.filter((n,i)=>n>=maps[i].goal).length;stats.vacuums=1;
+  }
+  const state={version:3,started:s.started===true,ec:integer(s.ec),pi:integer(s.pi),unlocked,
+    region:integer(s.region,unlocked),counts:count,levels:series(s.levels,8,6),
+    types,ach:series(s.ach,9,1),education:flags(series(s.education,4,1)).map((n,i)=>n||Number(count[i]>=maps[i].goal)),
+    owned,equipped:owned[equipped]?equipped:0,tank:emptyTank(),pending:emptyPending(),
+    clean:createEnvironment(count.map((n,i)=>s.education?.[i]===1?maps[i].goal:n),v3?.clean),
+    fields:maps.map((_,i)=>restoreField(v3?.fields?.[i])),pending:emptyPending(),
+    rebirth:integer(s.rebirth,50),gems:integer(s.gems,10000),permanent:series(s.permanent,4,5),stats,
+    lang:s.lang===1?1:0,sound:s.sound!==false,music:s.music===true,fx:s.fx!==false,zoom:[.85,1,1.15].includes(s.zoom)?s.zoom:1,
+    volume:Number.isFinite(s.volume)?Math.min(1,Math.max(0,s.volume)):.35};
+  let room=tankSize(state);
+  for(const kind of Object.keys(sizes)){
+    state.tank[kind]=integer(s.tank?.[kind],Math.floor(room/sizes[kind]));
+    room-=state.tank[kind]*sizes[kind];
+  }
+  const available={...state.tank};
+  state.pending.forEach((stock,z)=>{
+    let remaining=goals[state.region][z]-state.clean[state.region][z];
+    for(const kind of Object.keys(stock)){
+      stock[kind]=integer(s.pending?.[z]?.[kind],Math.min(available[kind],remaining));
+      available[kind]-=stock[kind];remaining-=stock[kind];
+    }
+  });
+  state.fields=state.fields.map((items,r)=>items?.filter(o=>state.clean[r][o.zone]<goals[r][o.zone])??null);
+  return state;
+}
+function save(state){
+  try{localStorage.setItem(key,JSON.stringify(state));return true}catch{return false}
+}
+function fresh(){
+  const state={version:3,started:false,ach:Array(9).fill(0),education:Array(4).fill(0),clean:createEnvironment(),fields:maps.map(()=>null),
+    lang:0,sound:true,music:false,fx:true,zoom:1,volume:.35,rebirth:0,gems:0,permanent:Array(4).fill(0),
+    stats:Object.fromEntries(statsNames.map(k=>[k,k==='vacuums'?1:0]))};
+  resetCycle(state);
+  return state;
+}
+
+
+const clusters=[[240,500],[490,780],[800,610],[1050,790],[1380,500],[1380,860],[130,790]];
+function findSpawn(index,props,items,random,kind,player,zone,view){
+  for(let i=0;i<200;i++){
+    const spot=clusters[Math.floor(random()*clusters.length)];
+    const clustered=zone>=2&&i<80&&random()<.65;
+    const x=clustered?spot[0]+(random()-.5)*340:48+random()*(W-96);
+    const y=clustered?spot[1]+(random()-.5)*245:62+random()*(H-110);
+    if(x<42||x>W-42||y<52||y>H-42||index===1&&y<185)continue;
+    if(index===2&&kind==='leaf'&&!onRoad(x,y))continue;
+    if(i<90&&view&&x>view.left&&x<view.right&&y>view.top&&y<view.bottom)continue;
+    if(bins.some(b=>(x-b.x)**2+(y-b.y)**2<(i<145?250:140)**2))continue;
+    if(player&&(x-player.x)**2+(y-player.y)**2<95**2)continue;
+    if(props.some(p=>(x-p.x)**2+(y-p.y)**2<(p.r+22)**2))continue;
+    if(items.some(o=>(x-o.x)**2+(y-o.y)**2<16**2))continue;
+    const actual=zoneAt(x,y);
+    if(zone!==undefined&&actual!==zone)continue;
+    return {kind,zone:actual,x,y,vx:0,vy:0,angle:random()*Math.PI*2};
+  }
+  return null;
+}
+function suctionStats(s){
+  const t=tools[s.equipped];
+  return {reach:124+s.levels[1]*14+t[5],cone:t[8],
+    power:t[4]*(1+s.levels[0]*.16+s.permanent[0]*prestige[0][2])};
+}
+function pull(object,p,stats,dt){
+  const dx=object.x-p.x,dy=object.y-p.y,dist=Math.hypot(dx,dy);
+  if(dist>=stats.reach||dist>0&&(dx*p.cx+dy*p.cy)/dist<Math.cos(stats.cone))return false;
+  if(dist<29)return true;
+  const nx=p.x+p.cx*17-object.x,ny=p.y+p.cy*17-object.y;
+  const length=Math.hypot(nx,ny)||1;
+  const acc=560*stats.power*(.33+.67*(1-dist/stats.reach)**2)*dt/materials[object.kind].mass;
+  object.vx+=nx/length*acc;object.vy+=ny/length*acc;
+  const max=Math.min(520,205+stats.power*25),speed=Math.hypot(object.vx,object.vy);
+  if(speed>max){object.vx*=max/speed;object.vy*=max/speed;}
+  return false;
+}
+function capture(s,kind,room=tankSize(s)-used(s)){
+  if(sizes[kind]>room)return false;
+  s.tank[kind]++;s.stats.suctioned++;
+  return true;
+}
+
+let audio, bed, filter, gain, nextNote=0, note=0;
+function activate(){
+  if(!globalThis.AudioContext)return;
+  if(!audio){
+    audio=new AudioContext();
+    const buffer=audio.createBuffer(1,audio.sampleRate*2,audio.sampleRate);
+    const signal=buffer.getChannelData(0);
+    for(let i=0;i<signal.length;i++)signal[i]=Math.random()*2-1;
+    bed=audio.createBufferSource();bed.buffer=buffer;bed.loop=true;
+    filter=audio.createBiquadFilter();filter.type='lowpass';filter.frequency.value=420;
+    gain=audio.createGain();gain.gain.value=0;
+    bed.connect(filter).connect(gain).connect(audio.destination);bed.start();
+  }
+  if(audio.state==='suspended')audio.resume().catch(()=>{});
+}
+function tone(freq,when,len,vol,type){
+  const osc=audio.createOscillator(), env=audio.createGain();
+  osc.type=type;osc.frequency.value=freq;env.gain.value=.0001;
+  osc.connect(env).connect(audio.destination);
+  env.gain.setValueAtTime(.0001,when);env.gain.exponentialRampToValueAtTime(Math.max(.0002,vol),when+.04);
+  env.gain.exponentialRampToValueAtTime(.0001,when+len);
+  osc.start(when);osc.stop(when+len);
+}
+function chime(s,kind){
+  if(!audio||!s.sound||!s.volume)return;
+  const tones={collect:[700,930],buy:[440,660,880],win:[523,659,784,1047],map:[392,523,784],rustle:[190]};
+  tones[kind].forEach((f,i)=>tone(f,audio.currentTime+i*.075,.16,s.volume*.19,'sine'));
+}
+function ambient(s,air){
+  if(!audio)return;
+  const now=audio.currentTime;
+  gain.gain.setTargetAtTime(air&&s.sound?s.volume*.14:0,now,.06);
+  if(s.sound&&s.music&&s.volume&&now>=nextNote){
+    tone([196,293.66,329.63,392,261.63,329.63,293.66,246.94][note++%8],now,1.4,s.volume*.12,'sine');
+    nextNote=now+.8;
+  }
+}
+
+
+const $=id=>document.getElementById(id);
+const canvas=$('world'), c=canvas.getContext('2d'), modal=$('modal');
+let state=load(), playing=false, panel='', world, items=[], activeBins=[], energy=100, last=0, time=0, uiTime=0;
+let width=0,height=0,ratio=1,zoom=1,originX=0,originY=0,air=false,cooldown=0,notice=0,spawnClock=0,playClock=0,blockedNotice=0;
+const p={x:410,y:270,angle:0,walk:false}, camera={x:610,y:290};
+const keys=new Set(), aim={x:0,y:0,current:false}, stick={x:0,y:0};
+let pointerAir=false,touchAir=false;
+let zoneClocks=[], cleanSummary=0;
+const particles=Array.from({length:150},()=>({life:0}));
+let particleIndex=0;
+const tx=(va,es)=>state.lang?es:va;
+const L=pair=>pair[state.lang];
+const clamp=(n,min,max)=>Math.min(max,Math.max(min,n));
+const tool=()=>tools[state.equipped];
+const room=()=>tankSize(state)-used(state);
+const capacity=()=>100+20*state.levels[3];
+const kinds=()=>['paper','bottle','can','leaf',maps[state.region].item];
+const progressTotal=()=>state.counts.reduce((sum,n)=>sum+n,0);
+const levelTotal=()=>state.levels.reduce((sum,n)=>sum+n,0);
+const missionName=()=>L(maps[state.region].mission);
+const playLabel=()=>state.started?tx('Continuar','Continuar'):tx('Jugar','Jugar');
+const buttons={
+  shop:()=>tx('Millores','Mejoras'),map:()=>tx('Mapa','Mapa'),missions:()=>tx('Missions','Misiones'),
+  ods:()=>tx('Enciclopèdia ODS','Enciclopedia ODS'),settings:()=>tx('Ajustos','Ajustes'),
+  rebirth:()=>tx('Renàixer','Renacer'),stats:()=>tx('Estadístiques','Estadísticas'),
+  maintenance:()=>tx('Manteniment','Mantenimiento'),
+  vacuum:()=>tx('Aspiradores','Aspiradoras'),
+  credits:()=>tx('Crèdits','Créditos'),help:()=>tx('Controls','Controles'),pause:()=>tx('Pausa','Pausa')
+};
+const achievements=[
+  [()=>progressTotal()>=1,5,['Primer reciclatge','Primer reciclaje']],
+  [()=>state.types[0]>=3&&state.types[1]>=3&&state.types[2]>=3,18,['Tres materials separats · ODS 12','Tres materiales separados · ODS 12']],
+  [()=>levelTotal()>=1,10,['Primera millora','Primera mejora']],
+  [()=>state.counts[0]>=maps[0].goal,15,['Parc recuperat','Parque recuperado']],
+  [()=>state.unlocked===3,25,['Exploració sostenible','Exploración sostenible']],
+  [()=>progressTotal()>=100,40,['100 materials classificats','100 materiales clasificados']],
+  [()=>state.owned[4]===1,85,['Tecnologia solar · ODS 7','Tecnología solar · ODS 7']],
+  [()=>state.stats.deliveries>=15,45,['15 entregues','15 entregas']],
+  [()=>state.stats.suctioned>=500,150,['500 residus aspirats','500 residuos aspirados']]
+];
+let random=rng(1);
+function spawn(zone,view){
+  const types=kinds().filter(kind=>!(state.region===2&&zone>=2&&kind==='leaf'));
+  const kind=types[Math.floor(random()*types.length)];
+  const item=findSpawn(state.region,world.obstacles,items,random,kind,p,zone,view);
+  if(!item)return false;
+  items.push(item);
+  return true;
+}
+function region(index){
+  state.region=index;
+  world=makeWorld(maps[index],index);
+  activeBins=bins;
+  random=rng(maps[index].seed);
+  items=state.fields[index]??[];
+  const initialize=state.fields[index]===null;
+  state.fields[index]=items;
+  Object.assign(p,{...entrance,angle:0,walk:false});
+  if(initialize)zones.forEach((_,z)=>{
+    for(let n=0;n<spawnLimits(state,index,z).cap;n++)spawn(z);
+  });
+  cleanSummary=mapPercent(state,index);
+  zoneClocks=zones.map(()=>0);
+  Object.assign(camera,{x:610,y:280});
+  particles.forEach(particle=>particle.life=0);
+  aim.current=false;energy=capacity();cooldown=0;spawnClock=0;
+}
+function regenerate(dt){
+  for(let z=0;z<zones.length;z++)zoneClocks[z]+=dt;
+  spawnClock+=dt;
+  if(spawnClock<.4)return;
+  spawnClock=0;
+  const counts=zones.map(()=>0);
+  for(const item of items)counts[item.zone]++;
+  const view={left:originX,right:originX+width/zoom,top:originY,bottom:originY+height/zoom};
+  zones.forEach((_,z)=>{
+    const {cap,interval}=spawnLimits(state,state.region,z);
+    if(counts[z]<cap&&zoneClocks[z]>=interval&&spawn(z,view))zoneClocks[z]=0;
+  });
+}
+function toast(message){
+  $('toast').textContent=message;clearTimeout(notice);
+  notice=setTimeout(()=>$('toast').textContent='',2900);
+}
+function spark(x,y,color,count,angle=null){
+  if(!state.fx)return;
+  for(let n=0;n<count;n++){
+    const particle=particles[particleIndex++%particles.length], a=angle===null?Math.random()*Math.PI*2:angle+(Math.random()-.5)*1.05;
+    const speed=25+Math.random()*160;
+    Object.assign(particle,{x,y,color,vx:Math.cos(a)*speed,vy:Math.sin(a)*speed,life:.22+Math.random()*.48});
+  }
+}
+const missionBonus=i=>[135,410,900,2200][i];
+function deliver(b){
+  const bin=bins.indexOf(b);
+  let size=0,count=0,amount=0,bonus=0;
+  const recovered=[];
+  for(const kind of Object.keys(state.tank)){
+    const n=state.tank[kind];
+    if(materials[kind].bin!==bin||!n)continue;
+    count+=n;size+=sizes[kind]*n;
+    const pending=state.pending.reduce((sum,stock)=>sum+stock[kind],0);
+    amount+=(pending+(n-pending)*1.25)*priceFor(state,kind);
+    const result=addTreatment(state,kind);
+    bonus+=result.bonus;recovered.push(...result.recovered);
+    state.tank[kind]=0;
+  }
+  if(!count){
+    toast(L(b.name)+' · '+tx('El dipòsit no conté materials compatibles','El depósito no contiene materiales compatibles'));
+    return;
+  }
+  const wasEligible=eligible(state);
+  cleanSummary=mapPercent(state,state.region);
+  const previous=state.counts[state.region], previousTotal=progressTotal();
+  const value=Math.max(1,Math.round(amount));
+  state.counts[state.region]+=count;state.types[bin]+=count;
+  state.stats.recycled+=count;state.stats.deliveries++;
+  state.pi+=Math.floor((previousTotal+count)/12)-Math.floor(previousTotal/12);
+  addCredits(state,value);
+  const map=maps[state.region];
+  spark(b.x,b.y,b.color,16);
+  toast('+'+value+' EC · '+count+' · −'+size+' '+tx('espai','espacio'));
+  if(previous<map.goal&&state.counts[state.region]>=map.goal){
+    state.education[state.region]=1;state.stats.maps++;state.pi+=2;
+    addCredits(state,Math.round(missionBonus(state.region)*multiplier(state)));
+    state.unlocked=Math.max(state.unlocked,Math.min(3,state.region+1));
+    spark(b.x,b.y,'#fff5a7',32);chime(state,'win');
+    toast(state.region===3?tx('Última missió completada','Última misión completada'):tx('Missió completada! Nou mapa disponible (M)','¡Misión completada! Nuevo mapa disponible (M)'));
+  }else chime(state,'collect');
+  if(recovered.length){
+    const reward=Math.round(bonus*multiplier(state));
+    addCredits(state,reward);
+    spark(b.x,b.y,'#c7f474',42);chime(state,'win');
+    const label=cleanSummary===100?tx('Regió recuperada','Región recuperada'):recovered.map(z=>L(zones[z])).join(', ');
+    toast(label+' ✓ · +'+(value+reward)+' EC'+(previous<map.goal&&state.counts[state.region]>=map.goal&&state.region<3?' · M':''));
+  }
+  checkAchievements();save(state);hud();
+  if(!wasEligible&&eligible(state))toast(tx('Ja pots renàixer!','¡Ya puedes renacer!'));
+}
+function checkAchievements(){
+  achievements.forEach(([condition,value],i)=>{
+    if(!state.ach[i]&&condition()){state.ach[i]=1;addCredits(state,Math.round(value*multiplier(state)));}
+  });
+}
+function avoid(o,r,dt){
+  for(const obstacle of world.obstacles){
+    const dx=o.x-obstacle.x,dy=o.y-obstacle.y,limit=r+obstacle.r;
+    if(Math.abs(dx)>=limit||Math.abs(dy)>=limit)continue;
+    const d=Math.hypot(dx,dy)||.0001;
+    if(d<limit){
+      const nx=dx/d||(!dy?1:0),ny=dy/d;
+      o.x=obstacle.x+nx*limit;o.y=obstacle.y+ny*limit;
+      if(dt){const dot=o.vx*nx+o.vy*ny;if(dot<0){o.vx-=dot*nx*1.3;o.vy-=dot*ny*1.3}}
+    }
+  }
+  o.x=clamp(o.x,r,W-r);o.y=clamp(o.y,state.region===1?150+r:r,H-r);
+}
+function simulation(dt){
+  let x=Number(keys.has('d')||keys.has('arrowright'))-Number(keys.has('a')||keys.has('arrowleft'))+stick.x;
+  let y=Number(keys.has('s')||keys.has('arrowdown'))-Number(keys.has('w')||keys.has('arrowup'))+stick.y;
+  const len=Math.hypot(x,y);
+  if(len>1){x/=len;y/=len}
+  p.walk=len>.08;
+  const speed=(195+state.levels[5]*18)*(1+state.permanent[2]*prestige[2][2]);
+  p.x+=x*speed*dt;p.y+=y*speed*dt;avoid(p,10,0);
+  if(aim.current)p.angle=Math.atan2(aim.y/zoom+originY-p.y,aim.x/zoom+originX-p.x);
+  else if(p.walk)p.angle=Math.atan2(y,x);
+  const wants=pointerAir||touchAir||keys.has(' ');
+  if(!wants)cooldown=0;
+  let remaining=room();
+  blockedNotice=Math.max(0,blockedNotice-dt);
+  air=wants&&cooldown===0&&energy>0&&remaining>0;
+  if(wants&&!remaining&&!blockedNotice){
+    toast(tx('Dipòsit ple. Ves a una estació de reciclatge','Depósito lleno. Ve a una estación de reciclaje'));
+    blockedNotice=2.8;
+  }
+  if(air){
+    energy=Math.max(0,energy-(19*tool()[6]/(1+.16*state.levels[2]))*dt);
+    if(!energy){cooldown=1;toast(tx('Bateria buida · solta el botó per a recarregar','Batería vacía · suelta el botón para recargar'))}
+    if(state.fx&&Math.random()<dt*(23+Math.min(22,tool()[4]*3))){
+      const a=p.angle+(Math.random()-.5)*tool()[8]*1.8;
+      const d=30+Math.random()*suctionStats(state).reach*.74;
+      const particle=particles[particleIndex++%particles.length];
+      const x=p.x+Math.cos(a)*d,y=p.y+Math.sin(a)*d;
+      const life=.15+d*.0025;
+      Object.assign(particle,{x,y,color:tool()[7],vx:(p.x+Math.cos(p.angle)*17-x)/life,vy:(p.y+Math.sin(p.angle)*17-y)/life,life});
+    }
+  }else energy=Math.min(capacity(),energy+(18+state.levels[4]*5)*dt);
+  const stats=suctionStats(state);
+  p.cx=Math.cos(p.angle);p.cy=Math.sin(p.angle);
+  const drag=Math.exp(-5*dt);
+  let changed=false;
+  for(let i=items.length-1;i>=0;i--){
+    const o=items[i];
+    if(air&&sizes[o.kind]<=remaining&&Math.abs(o.x-p.x)<stats.reach&&Math.abs(o.y-p.y)<stats.reach&&pull(o,p,stats,dt)){
+      if(capture(state,o.kind,remaining)){
+        state.pending[o.zone][o.kind]++;
+        remaining-=sizes[o.kind];items.splice(i,1);changed=true;
+        spark(p.x+p.cx*17,p.y+p.cy*17,tool()[7],3);
+        continue;
+      }
+    }
+    if(Math.abs(o.vx)+Math.abs(o.vy)<.12)continue;
+    o.x+=o.vx*dt;o.y+=o.vy*dt;o.angle+=(o.vx-o.vy)*dt*.024;
+    o.vx*=drag;o.vy*=drag;
+    avoid(o,7,dt);
+  }
+  if(changed){
+    chime(state,'rustle');save(state);
+  }
+  regenerate(dt);
+  playClock+=dt;
+  if(playClock>=1){state.stats.seconds++;playClock-=1;if(state.stats.seconds%10===0)save(state);}
+}
+
+function resize(){
+  const rect=canvas.getBoundingClientRect();width=rect.width;height=rect.height;
+  ratio=Math.min(2,devicePixelRatio||1);
+  canvas.width=Math.max(1,Math.round(width*ratio));canvas.height=Math.max(1,Math.round(height*ratio));
+}
+new ResizeObserver(resize).observe(canvas);
+function render(dt){
+  zoom=clamp(width/1000,.77,1.22)*state.zoom;
+  const targetX=playing?p.x:740+Math.sin(time*.15)*55,targetY=playing?p.y:335;
+  camera.x+=(targetX-camera.x)*Math.min(1,dt*5);camera.y+=(targetY-camera.y)*Math.min(1,dt*5);
+  const viewW=width/zoom,viewH=height/zoom;
+  originX=viewW>W?(W-viewW)/2:clamp(camera.x-viewW/2,0,W-viewW);
+  originY=viewH>H?(H-viewH)/2:clamp(camera.y-viewH/2,0,H-viewH);
+  c.setTransform(ratio,0,0,ratio,0,0);
+  c.fillStyle=maps[state.region].ground;c.fillRect(0,0,width,height);
+  c.scale(zoom,zoom);c.translate(-originX,-originY);c.drawImage(world.layer,0,0);
+  const visible=(x,y)=>x>originX-75&&x<originX+viewW+75&&y>originY-65&&y<originY+viewH+106;
+  if(state.region===1&&state.fx){
+    c.strokeStyle='#e0fff48a';c.lineWidth=2;
+    for(let x=0;x<W;x+=120){
+      const y=90+Math.sin(x/260+time*1.6)*13;
+      if(!visible(x,y))continue;
+      c.beginPath();c.moveTo(x,y);c.quadraticCurveTo(x+30,y-10,x+73,y);c.stroke();
+    }
+  }
+  renderRecovery(c,visible);
+  activeBins.filter(b=>visible(b.x,b.y)).forEach(b=>station(c,b,L(b.name),playing));
+  items.filter(o=>visible(o.x,o.y)).forEach(o=>debris(c,o));
+  if(air){
+    c.save();c.translate(p.x,p.y);c.rotate(p.angle);
+    const {reach:r,cone}=suctionStats(state);
+    const gradient=c.createLinearGradient(0,0,r,0);
+    gradient.addColorStop(0,'#fbffed48');gradient.addColorStop(1,'#fbffed00');
+    c.beginPath();c.moveTo(10,0);c.arc(0,0,r,-cone,cone);c.closePath();c.fillStyle=gradient;c.fill();c.restore();
+  }
+  const sorted=world.props.filter(o=>visible(o.x,o.y));
+  sorted.push(playing?p:{...p,x:1050+Math.sin(time*.32)*80,y:340,angle:time*.32,walk:true,preview:true});
+  sorted.sort((a,b)=>a.y-b.y);
+  for(const o of sorted){
+    if(o===p||o.preview)player(c,o,tool()[7],time,air,state.equipped);
+    else scenery(c,o,state.region,recoveryStage(zonePercent(state,state.region,o.zone)));
+  }
+  for(const v of particles){
+    if(v.life<=0)continue;
+    v.life-=dt;v.x+=v.vx*dt;v.y+=v.vy*dt;
+    c.globalAlpha=clamp(v.life,0,1);
+    ellipse(c,v.x,v.y,3,1.7,v.color);
+  }
+  c.globalAlpha=1;
+}
+const recoverySites=[[230,238],[1070,714],[180,560],[1420,535]];
+function renderRecovery(c,visible){
+  for(let z=0;z<zones.length;z++){
+    const [x,y]=recoverySites[z];
+    if(!visible(x,y))continue;
+    const stage=recoveryStage(zonePercent(state,state.region,z));
+    ellipse(c,x,y,54,25,['#55493740','#7b77392e','#669d552d','#a8e07539'][stage]);
+    for(let n=0;n<3+stage*3;n++){
+      const dx=(n*23%95)-47,dy=(n*11%37)-19;
+      ellipse(c,x+dx,y+dy,5,2,stage?'#548251':'#77734c');
+      if(stage>=2)ellipse(c,x+dx,y+dy-3,3,3,stage===3?'#fff2a0':'#bada88');
+    }
+    if(stage===3&&state.fx)ellipse(c,x+Math.sin(time*1.8)*26,y-16,2,2,'#fff2b1c0');
+  }
+  if(visible(depot.x,depot.y)){
+    const marker={...depot,mark:'↻',color:'#adf6d1'};
+    station(c,marker,buttons.maintenance(),true);
+  }
+}
+const btn=(label,action,primary=false,disabled=false)=>`<button data-action="${action}" ${primary?'class="primary"':''} ${disabled?'disabled':''}>${label}</button>`;
+const card=(title,description,action='')=>`<article class="card"><h3>${title}</h3><p>${description}</p>${action}</article>`;
+const grid=cards=>`<div class="cards">${cards.join('')}</div>`;
+const help=()=>tx('WASD o fletxes · Apunta amb el ratolí · Mantín clic o espai per a aspirar · E recicla · M mapa · U millores · V aspiradores · Esc pausa. En mòbil, mou-te amb el joystick, toca el terreny per a apuntar i mantín el botó de la dreta.',
+'WASD o flechas · Apunta con el ratón · Mantén clic o espacio para aspirar · E recicla · M mapa · U mejoras · V aspiradoras · Esc pausa. En móvil, muévete con el joystick, toca el terreno para apuntar y mantén el botón de la derecha.');
+function layout(){
+  document.documentElement.lang=state.lang?'es':'ca-valencia';
+  $('home').hidden=playing;$('shade').hidden=playing;$('nav').hidden=!playing;$('touch').hidden=!playing;
+  $('home').innerHTML=`<h1>ECO BLOWER<span>2030 <small>V3</small></span></h1><p>${tx('Aspira residus dispersos, recull-los al dipòsit i recicla’ls per recuperar quatre ecosistemes.','Aspira residuos dispersos, guárdalos en el depósito y recíclalos para recuperar cuatro ecosistemas de forma permanente.')}</p><div class="buttons">${btn(playLabel(),'play',true)}${['ods','settings','credits'].map(id=>btn(buttons[id](),id)).join('')}</div>`;
+  $('nav').innerHTML=['map','shop','vacuum','missions','rebirth','stats','ods','pause'].map(id=>btn(buttons[id](),id)).join('');
+  $('footer').textContent=playing?help():tx('Un videojoc sobre els Objectius de Desenvolupament Sostenible','Un videojuego sobre los Objetivos de Desarrollo Sostenible');
+  $('hud').hidden=!playing;hud();
+}
+function hud(){
+  if(!playing)return;
+  if(!$('wallet')){
+    $('hud').innerHTML=`<div class="hud-card" id="mission"><strong id="area"></strong><br><span id="goal"></span><progress id="goalBar" aria-label="Missió / Misión"></progress><span id="cleanLocal"></span><progress id="cleanBar" max="100" aria-label="Neteja / Limpieza"></progress></div><div class="hud-card"><b id="wallet"></b><br><span id="device"></span><progress id="power" aria-label="Energia / Energía"></progress><span id="tankLabel"></span><progress id="tankBar" aria-label="Dipòsit / Depósito"></progress></div><div id="nearStation" class="hud-card" hidden></div>`;
+  }
+  $('area').textContent=L(maps[state.region].name);
+  $('goal').textContent=missionName()+' · '+Math.min(state.counts[state.region],maps[state.region].goal)+'/'+maps[state.region].goal;
+  $('goalBar').max=maps[state.region].goal;$('goalBar').value=state.counts[state.region];
+  $('wallet').textContent=state.ec.toLocaleString()+' EC · '+state.pi+' PI · '+state.gems+' EG · ↻ '+state.rebirth;
+  $('device').textContent='EcoVac '+L(tool())+' · '+Math.ceil(energy)+'/'+capacity();
+  $('power').max=capacity();$('power').value=energy;
+  const max=tankSize(state),fill=used(state),fraction=fill/max;
+  $('tankLabel').textContent=tx('Dipòsit','Depósito')+' '+fill+'/'+max;
+  $('tankBar').max=max;$('tankBar').value=fill;
+  $('tankBar').dataset.fill=fraction>=1?'full':fraction>=.85?'near':fraction>=.5?'high':'low';
+  const local=zoneAt(p.x,p.y);
+  $('cleanLocal').textContent=tx('Neteja','Limpieza')+' '+cleanSummary+'% · '+L(zones[local])+' '+zonePercent(state,state.region,local)+'%';
+  $('cleanBar').value=cleanSummary;
+  const b=nearby();
+  $('nearStation').hidden=!b;
+  if(b){
+    const label=b===depot?buttons.maintenance()+' · E':L(b.name)+' · E / '+tx('Reciclar','Reciclar');
+    if($('nearStation').textContent!==label)$('nearStation').innerHTML='<button data-action="deliver">'+label+'</button>';
+  }
+}
+function price(i){return Math.round(upgrades[i][4]*upgradeGrowth**state.levels[i])}
+function shop(){
+  return grid(upgrades.map((u,i)=>{
+    const level=state.levels[i],cost=price(i);
+    return card('↑ '+L(u),u[2+state.lang]+' · '+tx('Nivell','Nivel')+' '+level+'/6',btn(level===6?tx('Nivell màxim','Nivel máximo'):cost+' EC','upgrade-'+i,true,level===6||state.ec<cost));
+  }))+ '<h3>'+tx('Contingut del dipòsit','Contenido del depósito')+'</h3>'+
+    grid(bins.map((b,i)=>card(L(b.name),Object.keys(state.tank).filter(k=>materials[k].bin===i)
+      .reduce((n,k)=>n+state.tank[k],0)+' '+tx('peces','piezas'))));
+}
+function vacuum(){
+  const next=tools.find((_,i)=>!state.owned[i]);
+  const overview='<p>'+tx('Equipada','Equipada')+' · EcoVac '+L(tool())+' · '+
+    (next?tx('Següent','Siguiente')+' EcoVac '+L(next)+' · '+next[2].toLocaleString()+' EC':tx('Catàleg complet','Catálogo completo'))+'</p>';
+  return overview+grid(tools.map((t,i)=>{
+    const locked=i>0&&!state.owned[i-1];
+    const small=used(state)>tankSize({...state,equipped:i});
+    const desc=tx('Força','Fuerza')+' ×'+t[4]+' · '+t[3]+' '+tx('de dipòsit','de depósito')+
+      ' · '+(124+t[5])+' '+tx('d’abast','de alcance')+' · '+Math.round(t[8]*360/Math.PI)+'° · '+tx('Consum','Consumo')+' ×'+t[6];
+    const label=state.equipped===i?tx('Equipada','Equipada'):locked?tx('Compra el model anterior','Compra el modelo anterior'):
+      small?tx('Buida espai abans','Libera espacio antes'):state.owned[i]?tx('Equipar','Equipar'):t[2].toLocaleString()+' EC';
+    return card('<span class="tag" style="background:'+t[7]+'">●</span>EcoVac '+L(t),desc,
+      btn(label,'tool-'+i,true,locked||small||state.equipped===i||!state.owned[i]&&state.ec<t[2]));
+  }));
+}
+function rebirthPanel(){
+  const goals=state.counts.slice(0,3).filter((n,i)=>n>=maps[i].goal).length;
+  return (used(state)?'<p>'+tx('Buida el dipòsit abans de renàixer.','Vacía el depósito antes de renacer.')+'</p>':'')+'<p>'+tx('Renaixements','Renacimientos')+' '+state.rebirth+' · '+state.gems+' EG · ×'+multiplier(state).toFixed(2)+' → ×'+(multiplier(state)+.15).toFixed(2)+'</p>'+
+    '<p>'+state.stats.runEarned.toLocaleString()+' / '+required(state).toLocaleString()+' EC '+tx('guanyats este cicle','ganados este ciclo')+
+    ' · EcoVac Solar '+(state.owned[4]?'✓':'◇')+' · '+tx('Missions del parc, platja i bosc','Misiones del parque, playa y bosque')+' '+goals+'/3</p>'+
+    btn(tx('Renàixer…','Renacer…'),'rebirthPrompt',true,!eligible(state))+
+    '<h3>'+tx('Millores permanents','Mejoras permanentes')+'</h3>'+grid(prestige.map((v,i)=>{
+      const n=state.permanent[i],price=boughtPrice(n);
+      return card(L(v),Math.round(v[2]*100)+'% '+tx('per nivell','por nivel')+' · '+n+'/5',btn(price+' EG','permanent-'+i,true,n>=5||state.gems<price));
+    }));
+}
+const campaignKinds=()=>['paper','bottle','leaf',maps[state.region].item]
+  .filter((kind,i,all)=>all.findIndex(k=>materials[k].bin===materials[kind].bin)===i);
+const campaignLoad=kind=>Math.min(8+state.region*5+state.equipped*4,Math.floor(tankSize(state)/sizes[kind]));
+function maintenancePanel(){
+  return '<p>'+tx('Recull materials donats i porta’ls a l’estació corresponent. Cada entrega de campanya paga un 25 % extra. La neteja de la regió es manté.',
+    'Recoge materiales donados y llévalos a la estación correspondiente. Cada entrega de campaña paga un 25 % extra. La limpieza de la región se conserva.')+'</p>'+
+    (used(state)?'<p>'+tx('Buida el dipòsit abans de recollir una donació.','Vacía el depósito antes de recoger una donación.')+'</p>':'')+
+    grid(campaignKinds().map((kind,i)=>{
+      const quantity=campaignLoad(kind), station=bins[materials[kind].bin];
+      return card(L(station.name),quantity+' '+tx('peces','piezas')+' · '+Math.round(quantity*priceFor(state,kind)*1.25)+' EC',
+        btn(tx('Recull la donació','Recoge la donación'),'campaign-'+i,true,used(state)>0));
+    }));
+}
+function statistics(){
+  const a=state.stats;
+  const rows=[
+    [tx('Temps jugat','Tiempo jugado'),Math.floor(a.seconds/60)+' min '+a.seconds%60+' s'],
+    [tx('Residus aspirats','Residuos aspirados'),a.suctioned],[tx('Residus reciclats','Residuos reciclados'),a.recycled],
+    ['EC '+tx('històrics','históricos'),a.earned],['EC '+tx('del cicle','del ciclo'),a.runEarned],
+    [tx('Entregues','Entregas'),a.deliveries],[tx('Models en este cicle','Modelos en este ciclo'),state.owned.filter(Boolean).length+'/8'],
+    [tx('Compres acumulades','Compras acumuladas'),Math.max(0,a.vacuums-1)],
+    [tx('Mapes recuperats diferents','Mapas recuperados distintos'),state.education.filter(Boolean).length+'/4'],
+    [tx('Restauracions totals','Restauraciones totales'),a.maps],[tx('Renaixements','Renacimientos'),state.rebirth]
+  ];
+  return grid(rows.map(([name,value])=>card(name,typeof value==='number'?value.toLocaleString():value)));
+}
+
+function settings(){
+  const check=(id,label)=>`<label class="setting">${label}<input type="checkbox" data-setting="${id}" ${state[id]?'checked':''}></label>`;
+  return `<label class="setting">${tx('Idioma','Idioma')}<select data-setting="lang"><option value="0">Valencià</option><option value="1" ${state.lang?'selected':''}>Castellano</option></select></label>
+  ${check('sound',tx('So','Sonido'))}${check('music',tx('Música ambiental','Música ambiental'))}${check('fx',tx('Partícules i ones animades','Partículas y olas animadas'))}
+  <label class="setting">${tx('Volum','Volumen')}<input type="range" min="0" max="1" step=".05" value="${state.volume}" data-setting="volume"></label>
+  <label class="setting">Zoom <select data-setting="zoom">${[.85,1,1.15].map(n=>`<option value="${n}" ${n===state.zoom?'selected':''}>${n*100}%</option>`).join('')}</select></label>
+  <p>${btn(tx('Reiniciar partida…','Reiniciar partida…'),'reset')}</p>`;
+}
+function show(id,restoreFocus=null){
+  if(!modal.open){keys.clear();pointerAir=touchAir=false;stick.x=stick.y=0;$('stick').firstElementChild.style.transform='';}
+  panel=id;$('title').textContent=buttons[id]?.()||(id==='rebirthPrompt'?buttons.rebirth():tx('Reiniciar partida','Reiniciar partida'));
+  const bodies={
+    shop,settings,vacuum,stats:statistics,rebirth:rebirthPanel,maintenance:maintenancePanel,
+    rebirthPrompt:()=>`<p>${tx('Tornaràs al parc amb l’EcoVac Bàsica. Reiniciaràs els EC i PI del cicle, les aspiradores, les millores temporals i el progrés dels mapes. Conservaràs les EcoGemmes, les millores permanents, els assoliments, les fites educatives, la neteja de totes les zones, les estadístiques i els ajustos.',
+    'Volverás al parque con la EcoVac Básica. Se reiniciarán los EC y PI del ciclo, las aspiradoras, las mejoras temporales y el progreso de los mapas. Conservarás las EcoGemas, las mejoras permanentes, los logros, los hitos educativos, la limpieza de todas las zonas, las estadísticas y los ajustes.')}</p>
+    <p>↻ ${state.rebirth} → ${state.rebirth+1} · +4 EG · ×${(multiplier(state)+.15).toFixed(2)}</p>${btn(tx('Confirma el renaixement','Confirma el renacimiento'),'rebirthConfirm',true)} ${btn(tx('Cancel·lar','Cancelar'),'rebirth')}`,
+    help:()=>`<p>${help()}</p><p>${tx('Busca residus pels camins i les clarianes. Apunta a un residu per a aspirar-lo. Torna a una estació compatible i prem E. Al bosc, deixa la fullaraca de fora dels camins com a hàbitat. Busca Manteniment al sud de l’estació d’envasos per a fer recollides de donacions.','Busca residuos por los caminos y los claros. Apunta a un residuo para aspirarlo. Vuelve a una estación compatible y pulsa E. En el bosque, respeta la hojarasca que queda fuera de los caminos. Busca Mantenimiento al sur de la estación de envases para recoger donaciones.')}</p>`,
+    map:()=>'<p>'+tx('Buida el dipòsit en les estacions abans de viatjar.','Vacía el depósito en las estaciones antes de viajar.')+'</p>'+grid(maps.map((m,i)=>card(L(m.name),L(m.mission)+' · ODS '+m.ids.join(', ')+'<br><strong>'+tx('Neteja','Limpieza')+' '+mapPercent(state,i)+'%</strong>'+
+      zones.map((name,z)=>{const percent=zonePercent(state,i,z);return '<br><span class="recovery stage-'+recoveryStage(percent)+'">'+(percent===100?'✓':'●')+'</span> '+L(name)+' '+percent+'%';}).join(''),btn(i>state.unlocked?tx('Bloquejat','Bloqueado'):i===state.region?tx('Regió actual','Región actual'):tx('Viatjar','Viajar'),'travel-'+i,true,i===state.region||i>state.unlocked)))),
+    missions:()=>grid(maps.map((m,i)=>card(L(m.mission),Math.min(m.goal,state.counts[i])+'/'+m.goal+' · '+missionBonus(i)+' EC + 2 PI · '+(state.counts[i]>=m.goal?tx('Completada','Completada'):i<=state.unlocked?tx('Disponible','Disponible'):tx('Bloquejada','Bloqueada')))))+
+      '<h3>'+tx('Reptes i assoliments','Retos y logros')+'</h3>'+grid(achievements.map(([,value,name],i)=>card((state.ach[i]?'✓ ':'◇ ')+L(name),value+' EC · '+(state.ach[i]?tx('Aconseguit','Conseguido'):tx('Pendent','Pendiente'))))),
+    ods:()=>grid(ods.map((o,i)=>{
+      const places=maps.filter(m=>m.ids.includes(i+1)).map(LMap=>L(LMap.name));
+      return card(`<span class="tag" style="background:${o[2]}">${i+1}</span>${L(o)}`,L(odsSummary[i])+'<br>'+tx('En la vida real','En la vida real')+' · '+o[3+state.lang]+(places.length?'<br>'+tx('En el joc','En el juego')+' · '+places.join(', '):''));
+    })),
+    pause:()=>`<div class="buttons">${btn(tx('Reprendre','Reanudar'),'resume',true)}${btn(buttons.help(),'help')}${btn(buttons.settings(),'settings')}${btn(tx('Menú principal','Menú principal'),'menu')}</div>`,
+    credits:()=>`<p>${tx('Eco Blower 2030 és un projecte educatiu amb il·lustracions i sons originals.','Eco Blower 2030 es un proyecto educativo con ilustraciones y sonidos originales.')}</p><p><a style="color:#c7f474" href="https://sdgs.un.org/goals" target="_blank" rel="noopener">${tx('Objectius de Desenvolupament Sostenible de les Nacions Unides','Objetivos de Desarrollo Sostenible de las Naciones Unidas')}</a></p>`,
+    reset:()=>`<p>${tx('Esta acció esborra el progrés de la partida.','Esta acción borra el progreso de la partida.')}</p>${btn(tx('Esborrar progrés','Borrar progreso'),'confirm',true)} ${btn(tx('Cancel·lar','Cancelar'),'settings')}`
+  };
+  const scroll=$('content').scrollTop;
+  $('content').innerHTML=bodies[id]();
+  if(!modal.open)modal.showModal();
+  if(restoreFocus){
+    const controls=[...$('content').querySelectorAll('button,input,select')];
+    const target=controls.find(el=>!el.disabled&&(el.dataset.action===restoreFocus||el.dataset.setting===restoreFocus));
+    (target||$('close')).focus({preventScroll:true});
+    modal.scrollTop=scroll;
+  }else modal.scrollTop=0;
+}
+function start(){
+  playing=true;state.started=true;region(state.region);
+  if(!save(state))toast(tx('Guardat local no disponible','Guardado local no disponible'));
+  else if(!progressTotal())toast(tx('Explora els camins i jardins. Apunta a un residu i mantín clic o espai','Explora los caminos y jardines. Apunta a un residuo y mantén clic o espacio'));
+  layout();canvas.focus({preventScroll:true});
+}
+function nearby(){
+  let closest=null,distance=72;
+  for(const b of [...activeBins,depot]){
+    const d=Math.hypot(p.x-b.x,p.y-b.y);
+    if(d<distance){closest=b;distance=d;}
+  }
+  return closest;
+}
+function inspect(){
+  const closest=nearby();
+  if(closest===depot)show('maintenance');
+  else if(closest)deliver(closest);
+  else toast(tx('Acosta’t a una estació per a reciclar','Acércate a una estación para reciclar'));
+}
+document.addEventListener('click',event=>{
+  const button=event.target.closest('[data-action]');
+  if(!button)return;
+  activate();
+  const action=button.dataset.action;
+  const [prefix,raw]=action.split('-'), i=Number(raw);
+  if(action==='maintenance'&&nearby()!==depot)return;
+  if(buttons[action]||action==='reset'||action==='rebirthPrompt'&&eligible(state)){show(action);return}
+  if(action==='play')start();
+  if(prefix==='campaign'&&panel==='maintenance'&&nearby()===depot){
+    const kind=campaignKinds()[i];
+    if(!kind||used(state))return;
+    const count=campaignLoad(kind);
+    state.tank[kind]=count;
+    save(state);modal.close();hud();
+    toast(tx('Porta la donació a','Lleva la donación a')+' '+L(bins[materials[kind].bin].name)+' · '+count);
+  }
+  if(action==='deliver'&&playing&&!modal.open)inspect();
+  if(action==='rebirthConfirm'&&panel==='rebirthPrompt'&&reborn(state)){
+    region(0);modal.close();save(state);hud();spark(p.x,p.y,'#e6ffa0',48);
+    if(state.fx)$('stage').animate([{opacity:.25},{opacity:1}],430);
+    toast(tx('Nou cicle · +4 EcoGemmes','Nuevo ciclo · +4 EcoGemas'));chime(state,'win');
+  }
+  if(prefix==='permanent'&&prestige[i]&&state.permanent[i]<5){
+    const cost=boughtPrice(state.permanent[i]);
+    if(state.gems<cost)return;
+    state.gems-=cost;state.permanent[i]++;save(state);hud();show('rebirth',action);
+  }
+  if(action==='resume')modal.close();
+  if(action==='menu'){playing=false;modal.close();layout();save(state)}
+  if(action==='confirm'){
+    const config={lang:state.lang,sound:state.sound,music:state.music,fx:state.fx,volume:state.volume,zoom:state.zoom};
+    state=Object.assign(fresh(),config);save(state);playing=false;region(0);modal.close();layout();
+  }
+  if(prefix==='travel'&&maps[i]&&i<=state.unlocked&&i!==state.region){
+    if(used(state)){
+      if(modal.open)modal.close();
+      toast(tx('Recicla el contingut del dipòsit abans de viatjar','Recicla el contenido del depósito antes de viajar'));
+      return;
+    }
+    region(i);modal.close();save(state);hud();chime(state,'map');toast(L(maps[i].name));
+  }
+  if(prefix==='upgrade'&&upgrades[i]&&state.levels[i]<6&&state.ec>=price(i)){
+    state.ec-=price(i);state.levels[i]++;checkAchievements();save(state);hud();chime(state,'buy');spark(p.x,p.y,'#dbffa3',20);show('shop',action);
+  }
+  if(prefix==='tool'&&tools[i]){
+    const t=tools[i];
+    const wasEligible=eligible(state);
+    if(used(state)>tankSize({...state,equipped:i}))return;
+    if(!state.owned[i]){
+      if(!state.owned[i-1]||state.ec<t[2])return;
+      state.ec-=t[2];state.owned[i]=1;state.stats.vacuums++;
+      toast(tx('Nova aspiradora disponible','Nueva aspiradora disponible')+' · EcoVac '+L(t));
+    }
+    state.equipped=i;checkAchievements();save(state);hud();chime(state,'buy');show('vacuum',action);
+    if(!wasEligible&&eligible(state))toast(tx('Ja pots renàixer!','¡Ya puedes renacer!'));
+  }
+});
+$('content').addEventListener('change',event=>{
+  const el=event.target, setting=el.dataset.setting;
+  if(!setting)return;
+  activate();state[setting]=el.type==='checkbox'?el.checked:Number(el.value);
+  save(state);layout();if(setting==='lang')show('settings','lang');
+});
+$('close').onclick=()=>modal.close();
+modal.addEventListener('close',()=>{if(playing)canvas.focus({preventScroll:true})});
+window.addEventListener('keydown',event=>{
+  if(!playing||modal.open)return;
+  const k=event.key.toLowerCase();
+  if((k===' '||k==='enter')&&event.target.closest('button,a'))return;
+  if([' ','arrowleft','arrowright','arrowup','arrowdown'].includes(k))event.preventDefault();
+  keys.add(k);
+  if(event.repeat)return;
+  if(k===' ')activate();
+  if(k==='escape')show('pause');
+  if(k==='u')show('shop');
+  if(k==='v')show('vacuum');
+  if(k==='m')show('map');
+  if(k==='e')inspect();
+});
+window.addEventListener('keyup',event=>keys.delete(event.key.toLowerCase()));
+window.addEventListener('blur',()=>{keys.clear();pointerAir=touchAir=false;stick.x=stick.y=0;$('stick').firstElementChild.style.transform='';});
+function aimAt(event){
+  const r=canvas.getBoundingClientRect();
+  Object.assign(aim,{x:event.clientX-r.left,y:event.clientY-r.top,current:true});
+}
+canvas.addEventListener('pointermove',e=>{if(playing&&(e.pointerType==='mouse'||canvas.hasPointerCapture(e.pointerId)))aimAt(e)});
+canvas.addEventListener('pointerdown',e=>{
+  if(!playing||e.button!==0)return;
+  aimAt(e);activate();canvas.setPointerCapture(e.pointerId);
+  if(e.pointerType==='mouse')pointerAir=true;
+});
+canvas.addEventListener('lostpointercapture',()=>pointerAir=false);
+$('boost').addEventListener('pointerdown',e=>{e.currentTarget.setPointerCapture(e.pointerId);touchAir=true;activate()});
+$('boost').addEventListener('lostpointercapture',()=>touchAir=false);
+const stickEl=$('stick');
+function steer(e){
+  const r=stickEl.getBoundingClientRect(),dx=e.clientX-r.left-r.width/2,dy=e.clientY-r.top-r.height/2;
+  const d=Math.max(29,Math.hypot(dx,dy));
+  stick.x=dx/d;stick.y=dy/d;
+  stickEl.firstElementChild.style.transform=`translate(${stick.x*27}px,${stick.y*27}px)`;
+}
+stickEl.addEventListener('pointerdown',e=>{stickEl.setPointerCapture(e.pointerId);steer(e);activate()});
+stickEl.addEventListener('pointermove',e=>{if(stickEl.hasPointerCapture(e.pointerId))steer(e)});
+stickEl.addEventListener('lostpointercapture',()=>{stick.x=stick.y=0;stickEl.firstElementChild.style.transform=''});
+function frame(now){
+  const dt=clamp((now-last)/1000,0,.033);last=now;time+=dt;
+  if(playing&&!modal.open){simulation(dt);if(now-uiTime>110){hud();uiTime=now;}}
+  else air=false;
+  ambient(state,air);render(dt);
+  requestAnimationFrame(frame);
+}
+window.addEventListener('pagehide',()=>save(state));
+region(state.region);layout();resize();requestAnimationFrame(frame);
+
+</script></body></html>

@@ -1,0 +1,8 @@
+[build]
+  publish = "."
+
+# Serve the game at the root URL (there is no index.html)
+[[redirects]]
+  from = "/"
+  to = "/EcoBlower2030_V3.html"
+  status = 200
